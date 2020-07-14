@@ -14,7 +14,7 @@ def backlight(inc=True):
 
     # Defines constants
     max_value = 100
-    increment = 0.1
+    increment = 0.2
 
     # Gets the current backlight level
     current_level = os.popen('xbacklight -get').read().splitlines()[0]
