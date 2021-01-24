@@ -7,17 +7,20 @@ import sys
 
 # Necessary installs
 # xbacklight
+# pamixer
 
 
 # Defines the function for altering the backlight
-def backlight(inc=True):
-
-    # Defines constants
-    max_value = 100
-    increment = 0.2
+def human_levels(
+        get_fn="xbacklight -get", 
+        set_fn="xbacklight -set ",
+        inc=True,
+        max_value=100,
+        increment=0.2
+        ):
 
     # Gets the current backlight level
-    current_level = os.popen('xbacklight -get').read().splitlines()[0]
+    current_level = os.popen(get_fn).read().splitlines()[0]
     current_level = float(current_level)
     
 
@@ -40,7 +43,7 @@ def backlight(inc=True):
 
     print(current_level, new_level)
     # Sets the level
-    os.system('xbacklight -set '+str(new_level))
+    os.system(set_fn+str(new_level))
 
 
 ## Main function
@@ -49,5 +52,15 @@ if __name__ == '__main__':
 
     if int(sys.argv[1]) == 0:
 
-        backlight(inc=int(sys.argv[2]))
+        human_levels(inc=int(sys.argv[2]))
+
+    elif int(sys.argv[1]) == 1:
+
+        human_levels(
+                inc=int(sys.argv[2]),
+                get_fn="pamixer --get-volume",
+                set_fn="pamixer --allow-boost --set-volume ",
+                max_value=200,
+                increment=0.1
+                )
 
