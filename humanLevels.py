@@ -12,8 +12,8 @@ import sys
 
 # Defines the function for altering the backlight
 def human_levels(
-        get_fn="xbacklight -get", 
-        set_fn="xbacklight -set ",
+        get_fn="brightnessctl g", 
+        set_fn="brightnessctl s",
         inc=True,
         max_value=100,
         increment=0.2
@@ -47,8 +47,7 @@ def human_levels(
 
 
 ## Main function
-
-if __name__ == '__main__':
+def run():
 
     if int(sys.argv[1]) == 0:
 
@@ -64,3 +63,5 @@ if __name__ == '__main__':
                 increment=0.1
                 )
 
+if __name__ == '__main__':
+    run()
