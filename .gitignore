@@ -1,1 +1,4 @@
 humanLevels/
+*.swp
+humanLevels.egg-info/
+result
